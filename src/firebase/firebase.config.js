@@ -1,0 +1,48 @@
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore"
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAueTYDteLeNI_3qIabd2huThwuTvy20hU",
+    authDomain: "crwn-hex.firebaseapp.com",
+    projectId: "crwn-hex",
+    storageBucket: "crwn-hex.appspot.com",
+    messagingSenderId: "928257313305",
+    appId: "1:928257313305:web:aa01da30099eea87ca3888",
+    measurementId: "G-N1RS1400ZL"
+}
+  
+firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth()
+
+const provider = new firebase.auth.GoogleAuthProvider()
+provider.setCustomParameters({
+    prompt: "select_account"
+});
+
+export const signInWithGoogle = () => auth.signInWithPopup(provider)
+
+export const firestore = firebase.firestore()
+
+export const addNewUserIfNewUser = async (user) => {
+    if(!user) {return}
+
+    const docRef = firestore.collection("users").doc(user.uid)
+    const doc = await docRef.get()
+
+    if (!doc.exists) {
+        try {
+            docRef.set({
+                name: user.displayName,
+                email: user.email,
+                creationDate: Date(),
+                photoURL: user.photoURL
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return docRef
+}

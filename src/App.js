@@ -1,26 +1,77 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import store from "./redux/store"
+import { userAction } from "./redux/actions/actions"
+
+import {
+  Route,
+  Switch
+} from "react-router-dom";
+
+import "./App.css"
+
+import { auth } from "./firebase/firebase.config"
+import { addNewUserIfNewUser } from "./firebase/firebase.config"
+
+import Header from "./containers/headerContainer"
+import { HomePage } from "./pages/homePage.component"
+import { GeneralShop } from "./pages/shop-page/generalShop.component"
+import { LoginRegisterPage } from "./pages/login-and-register/login-and-register.page"
+import CheckoutPage from './containers/checkout-page.container';
+
+class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      user: null
+    }
+  }
+
+  unsubscribe = null
+
+  componentDidMount() {
+    this.unsubscribe = auth.onAuthStateChanged(async (user) => {
+        const userRef = await addNewUserIfNewUser(user)
+
+        if (user) {
+          userRef.onSnapshot((doc) => {
+            store.dispatch(userAction({id: doc.id, ...doc.data()}))
+            console.log(store.getState())
+            // this.setState({user: {id: doc.id, ...doc.data()}}, () => {console.log(this.state)})
+          })
+        } else {
+          store.dispatch(userAction({}))
+          console.log(store.getState())
+        }
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
+  }
+
+  render() {
+    return (
+    <div>
+    <Header />
+      <Switch> 
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/shop">
+          <GeneralShop />
+        </Route>
+        <Route path="/auth">
+          <LoginRegisterPage />
+        </Route>
+        <Route exact path="/checkout">
+          <CheckoutPage />
+        </Route>
+      </Switch>  
     </div>
-  );
+    )
+  }
 }
 
-export default App;
+export default App
