@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import "./homepage.styles.scss"
-import { DirectoryMenu } from "../components/directory/directoryMenu.component"
+import DirectoryMenu from "../containers/directory.container"
 
 export class HomePage extends Component {
     render() {

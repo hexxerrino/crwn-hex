@@ -50,3 +50,10 @@ export const cartIconNumberMinus = () => {
         type: "CART-ICON-NUMBER-MINUS",
     }
 }
+
+export const setShopData = (data) => {
+    return {
+        type: "SET-DATA",
+        data: data
+    }
+}

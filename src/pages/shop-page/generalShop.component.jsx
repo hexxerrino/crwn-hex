@@ -1,25 +1,21 @@
-import React, { Component } from "react"
+import React from "react"
 
-import SHOP_DATA from "./shop.data"
+import {
+    Route,
+    Switch
+  } from "react-router-dom";
 
-import { HighlightBox } from "../../components/highlight-box/highlightBox.component"
+import ShopOverview from "../../containers/shop-overview.container"
+import CategoryPage from "../../containers/category-page.container"
 
-export class GeneralShop extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            data: SHOP_DATA
-        }
-    }
-
-    render() {
-        const {data} = this.state
-
-        return (
-            <div>
-                {data.map((category) => {return <HighlightBox key={category.id} {...category}/>})}
-            </div>
-        )
-    }
+export const GeneralShop = ({ match: {path} }) => {
+    return (
+        <Switch>
+            <Route exact path={`${path}`}>
+                <ShopOverview />
+            </Route>
+            <Route path={`${path}/:category`} component={CategoryPage} />
+        </Switch>
+    )
 }
+

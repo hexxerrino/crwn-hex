@@ -3,6 +3,9 @@ import React, {Component} from 'react';
 import store from "./redux/store"
 import { userAction } from "./redux/actions/actions"
 
+import shopData from "./pages/shop-page/shop.data"
+import { setShopData } from "./redux/actions/actions"
+
 import {
   Route,
   Switch
@@ -20,13 +23,6 @@ import { LoginRegisterPage } from "./pages/login-and-register/login-and-register
 import CheckoutPage from './containers/checkout-page.container';
 
 class App extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      user: null
-    }
-  }
 
   unsubscribe = null
 
@@ -37,12 +33,9 @@ class App extends Component {
         if (user) {
           userRef.onSnapshot((doc) => {
             store.dispatch(userAction({id: doc.id, ...doc.data()}))
-            console.log(store.getState())
-            // this.setState({user: {id: doc.id, ...doc.data()}}, () => {console.log(this.state)})
           })
         } else {
           store.dispatch(userAction({}))
-          console.log(store.getState())
         }
     })
   }
@@ -52,6 +45,8 @@ class App extends Component {
   }
 
   render() {
+    store.dispatch(setShopData(shopData))
+
     return (
     <div>
     <Header />
@@ -59,9 +54,7 @@ class App extends Component {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/shop">
-          <GeneralShop />
-        </Route>
+        <Route path="/shop" component={GeneralShop} />
         <Route path="/auth">
           <LoginRegisterPage />
         </Route>

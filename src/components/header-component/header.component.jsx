@@ -17,7 +17,6 @@ export const Header = ({user, cartPopup}) => {
                     <Link to="/">
                         <Logo />
                     </Link>
-                    <h1>{user ? user.name : "kor"}</h1>
             </div>
             <div className="options">
                     <Link className="option" to="/shop">
