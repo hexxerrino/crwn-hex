@@ -8,7 +8,12 @@ export const selectorFromCategorySelector = createSelector(
     categorySelector,
     category => createSelector(
         shopDataSelector,
-        data => data.find(cat => cat.routeName === category)
+        data => data[category]
     )
+)
+
+export const dataForOverviewSelector = createSelector(
+    shopDataSelector,
+    collections => Object.keys(collections).map(key => collections[key])
 )
 

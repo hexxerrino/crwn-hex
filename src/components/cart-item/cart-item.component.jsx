@@ -2,8 +2,9 @@ import React from "react"
 
 import "./cart-item.styles.scss"
 
-export const CartItem = ({item}) => {
-    const { imageUrl, name, count, price } = item
+export const CartItem = (data) => {
+    const { imageUrl, name, count, price } = data.item
+    console.log(data)
 
     return (
         <div className="cart-item">

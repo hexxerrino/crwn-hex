@@ -1,6 +1,6 @@
 const shopDataReducer = (state = [], action) => {
     if (action.type === "SET-DATA") {
-        return [...action.data]
+        return {...action.data}
     } else {
         return state 
     }
