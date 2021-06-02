@@ -8,32 +8,38 @@ import CartIcon from "../../containers/cart-icon.container"
 import CartPopup from "../../containers/cart-popup.container"
 
 import { ReactComponent as Logo } from "../../assets/crown.svg"
-import "./header.styles.scss"
+
+import { 
+    StyledHeader,
+    LogoContainer,
+    Options,
+    Option
+ } from "./header.styles"
 
 export const Header = ({user, cartPopup}) => {
     return (
-        <div className="header">
-            <div className="logo-container">
+        <StyledHeader>
+            <LogoContainer>
                     <Link to="/">
                         <Logo />
                     </Link>
-            </div>
-            <div className="options">
-                    <Link className="option" to="/shop">
+            </LogoContainer>
+            <Options>
+                    <Option className="option" to="/shop">
                         SHOP
-                    </Link>
-                    <Link className="option" to="/">
+                    </Option>
+                    <Option className="option" to="/">
                         CONTACT
-                    </Link>
+                    </Option>
                     { user.id ? (
-                    <div onClick={() => {auth.signOut()}} className="option">SIGN OUT</div>
-                    ) : (<Link className="option" to="/auth">
+                    <Option as="div" onClick={() => {auth.signOut()}} className="option">SIGN OUT</Option>
+                    ) : (<Option className="option" to="/auth">
                         SIGN IN
-                    </Link>)}
+                    </Option>)}
                     <CartIcon />
-            </div>
+            </Options>
             { cartPopup ? <CartPopup /> : null} 
-        </div>
+        </StyledHeader>
     )
 }
 
