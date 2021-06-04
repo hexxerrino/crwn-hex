@@ -25,6 +25,29 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
 export const firestore = firebase.firestore()
 
+export const addShopData = (collection, data) => {
+    const batch = firestore.batch()
+    const colRef = firestore.collection(collection)
+    
+    Object.keys(data).forEach(async key => {
+        const docRef = colRef.doc()
+        await batch.set(docRef, data[key])
+    })
+    batch.commit()
+}
+
+export const stateFromDatabase = async (collection) => {
+    const snapshot = await firestore.collection(collection).get()
+    const state = {}
+
+    snapshot.docs.forEach(doc => {
+        const data = doc.data()
+        state[data.title.toLowerCase()] = {...data, id: doc.id}
+    })
+
+    return state
+}
+
 export const addNewUserIfNewUser = async (user) => {
     if(!user) {return}
 
