@@ -3,9 +3,6 @@ import React, {Component} from 'react';
 import store from "./redux/store"
 import { userAction } from "./redux/actions/actions"
 
-import shopData from "./pages/shop-page/shop.data"
-import { setShopData } from "./redux/actions/actions"
-
 import {
   Route,
   Switch
@@ -18,7 +15,7 @@ import { addNewUserIfNewUser } from "./firebase/firebase.config"
 
 import Header from "./containers/headerContainer"
 import { HomePage } from "./pages/homePage.component"
-import { GeneralShop } from "./pages/shop-page/generalShop.component"
+import GeneralShop from "./containers/generalShop.container"
 import { LoginRegisterPage } from "./pages/login-and-register/login-and-register.page"
 import CheckoutPage from './containers/checkout-page.container';
 
@@ -45,8 +42,6 @@ class App extends Component {
   }
 
   render() {
-    store.dispatch(setShopData(shopData))
-
     return (
     <div>
     <Header />
