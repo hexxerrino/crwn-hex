@@ -37,10 +37,9 @@ export const addShopData = (collection, data) => {
 }
 
 export const stateFromDatabase = async (collection) => {
-    const snapshot = await firestore.collection(collection).get()
     const state = {}
 
-    snapshot.docs.forEach(doc => {
+    collection.docs.forEach(doc => {
         const data = doc.data()
         state[data.title.toLowerCase()] = {...data, id: doc.id}
     })

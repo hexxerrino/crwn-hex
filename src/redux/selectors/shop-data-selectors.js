@@ -8,7 +8,14 @@ export const selectorFromCategorySelector = createSelector(
     categorySelector,
     category => createSelector(
         shopDataSelector,
-        data => data[category]
+        (data) => {
+            if (data[category]) {
+                return data[category]
+            } else {
+                return {items: []}
+            }
+        }
+        // data => data[category]
     )
 )
 
