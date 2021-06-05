@@ -31,12 +31,15 @@ class GeneralShop extends Component {
 
     render() {
         const { path } = this.props.match
+        const shopData = this.props.shopData
         return (
             <Switch>
                 <Route exact path={`${path}`}>
-                    <ShopOverview />
+                    <ShopOverview isLoading={!shopData} />
                 </Route>
-                <Route path={`${path}/:category`} component={CategoryPage} />
+                <Route path={`${path}/:category`} render={
+                    (props) => <CategoryPage {...props} isLoading={!shopData} />
+                } /> 
             </Switch>
         )
     }

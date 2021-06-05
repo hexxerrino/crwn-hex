@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 
-import GeneralShop from "../pages/shop-page/generalShop.component"
+import App from "../App"
 
 const mapStateToProps = (state) => {
     return {
@@ -8,4 +8,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(GeneralShop)
+export default connect(mapStateToProps)(App)

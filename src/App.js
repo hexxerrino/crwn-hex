@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import store from "./redux/store"
 import { userAction } from "./redux/actions/actions"
 
 import {
@@ -24,15 +23,16 @@ class App extends Component {
   unsubscribe = null
 
   componentDidMount() {
+    const dispatch = this.props.dispatch
     this.unsubscribe = auth.onAuthStateChanged(async (user) => {
         const userRef = await addNewUserIfNewUser(user)
 
         if (user) {
           userRef.onSnapshot((doc) => {
-            store.dispatch(userAction({id: doc.id, ...doc.data()}))
+            dispatch(userAction({id: doc.id, ...doc.data()}))
           })
         } else {
-          store.dispatch(userAction({}))
+          dispatch(userAction({}))
         }
     })
   }
