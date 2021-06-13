@@ -8,19 +8,13 @@ export const selectorFromCategorySelector = createSelector(
     categorySelector,
     category => createSelector(
         shopDataSelector,
-        (data) => {
-            if (data[category]) {
-                return data[category]
-            } else {
-                return {items: []}
-            }
-        }
+        data => data ? data[category] : null
         // data => data[category]
     )
 )
 
 export const dataForOverviewSelector = createSelector(
     shopDataSelector,
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => collections ? Object.keys(collections).map(key => collections[key]) : null
 )
 

@@ -7,8 +7,9 @@ import WithSpinner from "../components/with-spinner/with-spinner.component"
 
 const mapStateToProps = (state) => {
     return {
-        shopData: dataForOverviewSelector(state)
+        shopData: dataForOverviewSelector(state),
+        isLoading: !state.shopData
     }
 }
 
-export default WithSpinner(connect(mapStateToProps)(ShopOverview))
+export default connect(mapStateToProps)(WithSpinner(ShopOverview))

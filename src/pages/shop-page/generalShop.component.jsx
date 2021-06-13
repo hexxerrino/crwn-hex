@@ -34,9 +34,7 @@ class GeneralShop extends Component {
         const shopData = this.props.shopData
         return (
             <Switch>
-                <Route exact path={`${path}`}>
-                    <ShopOverview isLoading={!shopData} />
-                </Route>
+                <Route exact path={`${path}`} component={ShopOverview} />
                 <Route path={`${path}/:category`} render={
                     (props) => <CategoryPage {...props} isLoading={!shopData} />
                 } /> 

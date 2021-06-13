@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 
-import { userAction } from "./redux/actions/actions"
-
 import {
   Route,
   Switch
 } from "react-router-dom";
 
 import "./App.css"
-
-import { auth } from "./firebase/firebase.config"
-import { addNewUserIfNewUser } from "./firebase/firebase.config"
 
 import Header from "./containers/headerContainer"
 import { HomePage } from "./pages/homePage.component"
@@ -20,25 +15,8 @@ import CheckoutPage from './containers/checkout-page.container';
 
 class App extends Component {
 
-  unsubscribe = null
-
   componentDidMount() {
-    const dispatch = this.props.dispatch
-    this.unsubscribe = auth.onAuthStateChanged(async (user) => {
-        const userRef = await addNewUserIfNewUser(user)
-
-        if (user) {
-          userRef.onSnapshot((doc) => {
-            dispatch(userAction({id: doc.id, ...doc.data()}))
-          })
-        } else {
-          dispatch(userAction({}))
-        }
-    })
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe()
+    this.props.updateUser()
   }
 
   render() {

@@ -8,8 +8,9 @@ import WithSpinner from "../components/with-spinner/with-spinner.component"
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        category: selectorFromCategorySelector(ownProps.match.params.category)(state)
+        category: selectorFromCategorySelector(ownProps.match.params.category)(state),
+        isLoading: !state.shopData
     }
 }
 
-export default WithSpinner(connect(mapStateToProps)(CategoryPage))
+export default connect(mapStateToProps)(WithSpinner(CategoryPage))

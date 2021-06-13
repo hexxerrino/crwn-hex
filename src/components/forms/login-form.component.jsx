@@ -2,7 +2,6 @@ import React, { Component } from "react"
 
 import { ButtonComponent } from "../button-component/button.component"
 import { InputComponent } from "../input-component/input.component"
-import { auth, signInWithGoogle } from "../../firebase/firebase.config"
 
 import "./login-form.styles.scss"
 
@@ -20,7 +19,7 @@ export class LoginForm extends Component {
         event.preventDefault()
 
         const [email, password] = event.target
-        await auth.signInWithEmailAndPassword(email.value, password.value)
+        this.props.localLogin({email: email.value, password: password.value})
 
         this.setState({email: "", password: ""})
     }
@@ -53,7 +52,7 @@ export class LoginForm extends Component {
                     label="Password" />
                     <div className="buttons">
                         <ButtonComponent type="submit">Sign in</ButtonComponent>
-                        <ButtonComponent google="true" onClick={signInWithGoogle}>
+                        <ButtonComponent google="true" onClick={this.props.googleLogin}>
                         {' '}
                         Sign in with Google{' '}
                         </ButtonComponent>

@@ -1,10 +1,3 @@
-export const userAction = (user) => {
-    return {
-        type: "CHANGE-USER",
-        user: user,
-    }
-}
-
 export const cartPopupAction = () => {
     return {
         type: "CART-POPUP"

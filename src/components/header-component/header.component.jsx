@@ -2,8 +2,6 @@ import React from "react"
 
 import { Link } from "react-router-dom"
 
-import { auth } from "../../firebase/firebase.config"
-
 import CartIcon from "../../containers/cart-icon.container"
 import CartPopup from "../../containers/cart-popup.container"
 
@@ -16,7 +14,7 @@ import {
     Option
  } from "./header.styles"
 
-export const Header = ({user, cartPopup}) => {
+export const Header = ({user, cartPopup, logout}) => {
     return (
         <StyledHeader>
             <LogoContainer>
@@ -32,7 +30,7 @@ export const Header = ({user, cartPopup}) => {
                         CONTACT
                     </Option>
                     { user.id ? (
-                    <Option as="div" onClick={() => {auth.signOut()}} className="option">SIGN OUT</Option>
+                    <Option as="div" onClick={logout} className="option">SIGN OUT</Option>
                     ) : (<Option className="option" to="/auth">
                         SIGN IN
                     </Option>)}

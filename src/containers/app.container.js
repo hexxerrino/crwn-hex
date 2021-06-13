@@ -2,10 +2,18 @@ import { connect } from "react-redux"
 
 import App from "../App"
 
+import { userUpdateState } from "../redux/actions/user-actions"
+
 const mapStateToProps = (state) => {
     return {
         shopData: state.shopData
     }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: () => { dispatch(userUpdateState()) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

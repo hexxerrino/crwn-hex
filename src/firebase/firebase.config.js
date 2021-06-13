@@ -47,6 +47,19 @@ export const stateFromDatabase = async (collection) => {
     return state
 }
 
+export const getCurrentUser = () => {
+    return new Promise((res, rej) => {
+        const unsub = auth.onAuthStateChanged(async (user) => {
+            unsub()
+            if (user) {
+                res(user)
+            } else {
+                rej(new Error("the guy isn't logged in"))
+            }
+        })
+    })
+}
+
 export const addNewUserIfNewUser = async (user) => {
     if(!user) {return}
 
