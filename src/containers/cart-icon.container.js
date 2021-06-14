@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 
 import { CartIcon } from "../components/cart-icon/cart-icon.component"
 
-import { cartPopupAction } from "../redux/actions/actions"
+import { cartPopupAction } from "../redux/actions/cart-actions"
 
 import { cartItemsSumSelector } from "../redux/selectors/cart-selectors"
 

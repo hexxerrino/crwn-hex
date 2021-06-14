@@ -2,7 +2,6 @@ import React, { Component } from "react"
 
 import { ButtonComponent } from "../button-component/button.component"
 import { InputComponent } from "../input-component/input.component"
-import { auth } from "../../firebase/firebase.config"
 
 import "./login-form.styles.scss"
 
@@ -25,19 +24,7 @@ export class RegisterForm extends Component {
 
         if(password.value !== confirmPass.value) {alert("pass doesn't match"); return}
 
-        auth.createUserWithEmailAndPassword(email.value, password.value)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            user.updateProfile({
-                displayName: username.value
-            })
-            .then(() => {this.setState({email: "", password: "", confirmPass: "", username: ""})})
-            .catch((error) => {console.log(error)})
-          })
-          .catch((error) => {
-            console.log(error)
-          });
+        this.props.registerUser({email: email, password: password, username: username})
     }
 
     handleChange = (event) => {

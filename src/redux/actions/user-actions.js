@@ -43,3 +43,21 @@ export const userUpdateState = () => {
         type: userActionTypes.USER_UPDATE_STATE
     }
 }
+export const userRegisterStart = (user) => {
+    return {
+        type: userActionTypes.USER_REGISTER_START,
+        payload: user
+    }
+}
+export const userRegisterSuccess = (user) => {
+    return {
+        type: userActionTypes.USER_REGISTER_SUCCESS,
+        payload: user
+    }
+}
+export const userRegisterFailure = (error) => {
+    return {
+        type: userActionTypes.USER_REGISTER_FAILURE,
+        payload: error
+    }
+}

@@ -9,7 +9,7 @@ import WithSpinner from "../components/with-spinner/with-spinner.component"
 const mapStateToProps = (state, ownProps) => {
     return {
         category: selectorFromCategorySelector(ownProps.match.params.category)(state),
-        isLoading: !state.shopData
+        isLoading: !state.shopData.data
     }
 }
 

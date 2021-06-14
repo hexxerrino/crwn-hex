@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import { CheckoutItem } from "../components/checkout-item/checkout-item.component"
-import { addCartItem, removeCartItem, clearCartItem } from "../redux/actions/actions"
+import { addCartItem, removeCartItem, clearCartItem } from "../redux/actions/cart-actions"
 
 const mapDispatchToProps = (dispatch) => {
     return {

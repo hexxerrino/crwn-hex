@@ -25,13 +25,6 @@ export const clearCartItem = (id) => {
     }
 }
 
-export const changeAllShopData = (data) => {
-    return {
-        type: "CHANGE-ALL-DATA",
-        data: data
-    }
-}
-
 export const cartIconNumberPlus = () => {
     return {
         type: "CART-ICON-NUMBER-PLUS",

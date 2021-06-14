@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 
 import { CollectionItem } from "../components/collection-item/collection.item.component"
 
-import { addCartItem, cartIconNumberPlus } from "../redux/actions/actions"
+import { addCartItem, cartIconNumberPlus } from "../redux/actions/cart-actions"
 
 const mapStateToProps = (state, ownProps) => {
     return {

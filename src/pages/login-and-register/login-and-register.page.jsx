@@ -1,7 +1,7 @@
 import React from "react"
 
 import LoginForm from "../../containers/login-form.container"
-import { RegisterForm } from "../../components/forms/register-form.component"
+import RegisterForm from "../../containers/register-form.container"
 
 import "./login-and-register.styles.scss"
 

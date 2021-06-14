@@ -36,7 +36,7 @@ export const addShopData = (collection, data) => {
     batch.commit()
 }
 
-export const stateFromDatabase = async (collection) => {
+export const stateFromDatabase = (collection) => {
     const state = {}
 
     collection.docs.forEach(doc => {

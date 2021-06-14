@@ -2,7 +2,14 @@ import { takeLatest, call, put, all } from 'redux-saga/effects'
 
 import { signInWithGoogle, addNewUserIfNewUser, auth, getCurrentUser, firestore } from "../../../firebase/firebase.config"
 
-import { logoutUserFailure, logoutUserSuccess, userLoginFailure, userLoginSuccess } from "../../actions/user-actions"
+import {
+     logoutUserFailure, 
+     logoutUserSuccess, 
+     userLoginFailure, 
+     userLoginSuccess, 
+     userRegisterSuccess, 
+     userRegisterFailure
+} from "../../actions/user-actions"
 
 import { userActionTypes } from "../../action-types/user-action-types"
 
@@ -50,11 +57,28 @@ function* userLogout() {
     }
 }
 
+function* userRegister(action) {
+    try {
+        const {email, password, username} = yield action.payload
+        const userCred = yield auth.createUserWithEmailAndPassword(email.value, password.value)
+        const user = yield userCred.user
+        yield user.updateProfile({
+            displayName: username.value
+        })
+        yield put(userRegisterSuccess({email: email.value, password: password.value}))
+    } catch (error) {
+        yield console.log(error)
+        yield put(userRegisterFailure(error))
+    }
+}
+
 export function* userSaga() {
     yield all([
         takeLatest(userActionTypes.USER_LOGIN_GOOGLE_START, fetchUserGoogle),
         takeLatest(userActionTypes.USER_LOGIN_LOCAL_START, fetchUserLocal),
         takeLatest(userActionTypes.USER_UPDATE_STATE, updateStateIfLoggedIn),
-        takeLatest(userActionTypes.USER_LOGOUT_START, userLogout)
+        takeLatest(userActionTypes.USER_LOGOUT_START, userLogout),
+        takeLatest(userActionTypes.USER_REGISTER_START, userRegister),
+        takeLatest(userActionTypes.USER_REGISTER_SUCCESS, fetchUserLocal)
     ]) 
 }

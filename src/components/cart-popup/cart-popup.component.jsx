@@ -5,7 +5,7 @@ import { CartItem } from "../cart-item/cart-item.component"
 import { withRouter } from "react-router-dom"
 
 import "./cart-popup.styles.scss"
-import { cartPopupAction } from "../../redux/actions/actions"
+import { cartPopupAction } from "../../redux/actions/cart-actions"
 
 const CartPopup = ({items, history, dispatch}) => {
     return (

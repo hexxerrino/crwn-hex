@@ -8,7 +8,7 @@ import WithSpinner from "../components/with-spinner/with-spinner.component"
 const mapStateToProps = (state) => {
     return {
         shopData: dataForOverviewSelector(state),
-        isLoading: !state.shopData
+        isLoading: !state.shopData.data
     }
 }
 
